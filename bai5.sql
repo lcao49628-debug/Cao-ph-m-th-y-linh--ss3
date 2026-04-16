@@ -1,0 +1,27 @@
+/*
+1. THIẾT KẾ LUỒNG XỬ LÝ :
+TH1 NHẬP SỐ LƯỢNG ÂM : SỬ DỤNG RẰNG CHECK 
+TH2 BẤM "ADD TO CART" MẶT HÀNG CÓ SẴN: SỬ DỤNG RẰNG BUỘC UNIQUE 
+*/
+CREATE TABLE CART_ITEMS (
+    CartItemID INT PRIMARY KEY IDENTITY(1,1),
+    UserID INT NOT NULL,
+    ProductID INT NOT NULL,
+    Quantity INT NOT NULL CHECK (Quantity > 0), 
+    AddedDate DATETIME DEFAULT GETDATE()
+);
+INSERT INTO CART_ITEMS (UserID, ProductID, Quantity)
+VALUES (1,50,1);
+
+SELECT ProductID, Quantity 
+FROM CART_ITEMS 
+WHERE UserID = 1;
+
+UPDATE CART_ITEMS
+SET Quantity = 5
+WHERE UserID = 1 
+AND ProductID = 50 ;
+  
+DELETE FROM CART_ITEMS
+WHERE UserID = 1 
+AND ProductID = 50;
